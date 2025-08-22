@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedStats - Статистика медичних декларацій</title>
+    <title>КНП "ЦПМСД№5 м. Вінниці"</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -424,14 +424,13 @@
             <div class="header-content">
                 <div class="logo">
                     <i class="fas fa-heartbeat"></i>
-                    <h1>MedStats</h1>
+                    <h1>КНП "ЦПМСД№5 м. Вінниці"</h1>
                 </div>
                 <nav>
                     <ul>
                         <li><a href="#" class="nav-link active" data-page="dashboard">Головна</a></li>
                         <li><a href="#" class="nav-link" data-page="stats">Статистика</a></li>
                         <li><a href="#" class="nav-link" data-page="admin">Адмін-панель</a></li>
-                        <li><a href="#" class="nav-link" data-page="about">Про нас</a></li>
                     </ul>
                 </nav>
             </div>
@@ -624,88 +623,28 @@
             </section>
 
             <!-- About Page -->
-            <section id="about" class="page-section">
-                <div class="section-header">
-                    <h2>Про систему MedStats</h2>
-                    <p>Інформація про наш сервіс моніторингу медичних декларацій</p>
-                </div>
-                
-                <div class="admin-panel">
-                    <div class="admin-section">
-                        <h3><i class="fas fa-info-circle"></i> Що таке MedStats?</h3>
-                        <p>MedStats - це сучасна веб-система для збору, аналізу та візуалізації статистики медичних декларацій. Наша платформа дозволяє лікарням, клінікам та медичним установам ефективно відстежувати кількість підписаних декларацій з пацієнтами.</p>
-                    </div>
-                    
-                    <div class="admin-section">
-                        <h3><i class="fas fa-chart-line"></i> Основні функції</h3>
-                        <ul style="margin-left: 20px; margin-bottom: 15px;">
-                            <li>Ведення обліку декларацій за віковими групами</li>
-                            <li>Аналіз статистики по амбулаторіях та лікарях</li>
-                            <li>Візуалізація даних у вигляді графіків та діаграм</li>
-                            <li>Експорт та імпорт даних</li>
-                            <li>Зручний пошук та фільтрація інформації</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="admin-section">
-                        <h3><i class="fas fa-envelope"></i> Контактна інформація</h3>
-                        <p>Якщо у вас виникли питання або пропозиції щодо покращення роботи системи, зв'яжіться з нами:</p>
-                        <p><strong>Email:</strong> support@medstats.org</p>
-                        <p><strong>Телефон:</strong> +380 (44) 123-45-67</p>
-                        <p><strong>Адреса:</strong> м. Київ, вул. Медична, 15</p>
-                    </div>
-                </div>
+            <section id="about" class="page-section hidden">
             </section>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>MedStats</h3>
-                    <p>Система моніторингу медичних декларацій</p>
-                    <p>Ефективне управління медичною статистикою</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Контакти</h3>
-                    <p>Email: support@medstats.org</p>
-                    <p>Телефон: +380 (44) 123-45-67</p>
-                    <p>Адреса: м. Київ, вул. Медична, 15</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Посилання</h3>
-                    <p><a href="#" style="color: #fff;">Головна</a></p>
-                    <p><a href="#" style="color: #fff;">Статистика</a></p>
-                    <p><a href="#" style="color: #fff;">Довідка</a></p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2023 MedStats. Всі права захищені.</p>
-            </div>
-        </div>
-    </footer>
-
+    
     <script>
-        // Константи
+        // Constants
         const AGE_GROUPS = ["0-5", "6-17", "18-39", "40-65", "65+"];
         const STORAGE_KEYS = {
             DOCTORS: 'doctorsData',
             AMBULATORIAS: 'ambulatoriasList'
         };
-        
-        // Глобальні змінні
+        const ADMIN_PASSWORD = "1804";
+
+        // Global variables
         let ambulatorias = [];
         let doctorsData = [];
         let currentEditId = null;
         let ageGroupChartInstance = null;
         let ambulatoriaChartInstance = null;
         
-        // Завантажити дані з локального сховища
+        // Load data from local storage
         function loadData() {
             const savedDoctors = localStorage.getItem(STORAGE_KEYS.DOCTORS);
             const savedAmbulatorias = localStorage.getItem(STORAGE_KEYS.AMBULATORIAS);
@@ -713,7 +652,7 @@
             if (savedAmbulatorias) {
                 ambulatorias = JSON.parse(savedAmbulatorias);
             } else {
-                // Початкові дані
+                // Initial data
                 ambulatorias = [
                     "АЗПСМ №1",
                     "Центральна міська амбулаторія",
@@ -728,7 +667,7 @@
             if (savedDoctors) {
                 doctorsData = JSON.parse(savedDoctors);
             } else {
-                // Початкові дані
+                // Initial data
                 doctorsData = [
                     { 
                         id: 1,
@@ -775,34 +714,42 @@
             }
         }
         
-        // Зберегти дані лікарів
+        // Save doctors data to local storage
         function saveDoctors() {
             localStorage.setItem(STORAGE_KEYS.DOCTORS, JSON.stringify(doctorsData));
         }
         
-        // Зберегти дані амбулаторій
+        // Save ambulatorias data to local storage
         function saveAmbulatorias() {
             localStorage.setItem(STORAGE_KEYS.AMBULATORIAS, JSON.stringify(ambulatorias));
         }
         
-        // Показати сторінку
+        // Show a page
         function showPage(pageId) {
-            // Приховати всі сторінки
+            if (pageId === 'admin') {
+                const password = prompt('Будь ласка, введіть пароль для доступу до Адмін-панелі:');
+                if (password !== ADMIN_PASSWORD) {
+                    alert('Невірний пароль!');
+                    return;
+                }
+            }
+        
+            // Hide all pages
             document.querySelectorAll('.page-section').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Показати вибрану сторінку
+            // Show the selected page
             document.getElementById(pageId).classList.add('active');
             
-            // Оновити навігацію
+            // Update navigation
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
             
             document.querySelector(`.nav-link[data-page="${pageId}"]`).classList.add('active');
             
-            // Оновити дані на сторінці
+            // Update page content
             if (pageId === 'dashboard' || pageId === 'stats') {
                 initDashboard();
             } else if (pageId === 'admin') {
@@ -811,7 +758,7 @@
             }
         }
         
-        // Ініціалізація дашборду
+        // Initialize the dashboard
         function initDashboard() {
             updateAmbulatoriasList();
             updateAmbulatoriasSelect();
@@ -821,7 +768,7 @@
             initCharts(doctorsData);
         }
         
-        // Оновлення списку амбулаторій
+        // Update the list of ambulatorias
         function updateAmbulatoriasList() {
             const ambulatoriaList = document.getElementById('ambulatoriaList');
             if (!ambulatoriaList) return;
@@ -846,7 +793,7 @@
             });
         }
         
-        // Оновлення випадаючого списку амбулаторій
+        // Update the ambulatoria select dropdown
         function updateAmbulatoriasSelect() {
             const ambulatoriaSelect = document.getElementById('ambulatoria');
             if (!ambulatoriaSelect) return;
@@ -861,7 +808,7 @@
             });
         }
         
-        // Додавання нової амбулаторії
+        // Add a new ambulatoria
         function addAmbulatoria() {
             const newAmbulatoriaInput = document.getElementById('newAmbulatoria');
             const newAmbulatoria = newAmbulatoriaInput.value.trim();
@@ -884,11 +831,11 @@
             initDashboard();
         }
         
-        // Видалення амбулаторії
+        // Delete an ambulatoria
         function deleteAmbulatoria(index) {
             const ambulatoriaToDelete = ambulatorias[index];
             
-            // Перевірити, чи є лікарі в цій амбулаторії
+            // Check if there are doctors in this ambulatoria
             const doctorsInAmbulatoria = doctorsData.filter(doctor => doctor.ambulatoria === ambulatoriaToDelete);
             
             if (doctorsInAmbulatoria.length > 0) {
@@ -904,7 +851,7 @@
             }
         }
         
-        // Відображення таблиці
+        // Render the main table
         function renderTable(data) {
             const tableBody = document.querySelector('#detailsTable tbody');
             if (!tableBody) return;
@@ -934,7 +881,7 @@
                 ambulatoriaCell.textContent = doctor.ambulatoria;
                 row.appendChild(ambulatoriaCell);
                 
-                // Відображення декларацій за віковими групами
+                // Display declarations by age group
                 doctor.declarations.forEach(declaration => {
                     const cell = document.createElement('td');
                     cell.textContent = declaration;
@@ -966,14 +913,14 @@
             });
         }
         
-        // Відображення таблиці останніх лікарів
+        // Render the recent doctors table
         function renderRecentTable() {
             const tableBody = document.querySelector('#recentTable tbody');
             if (!tableBody) return;
             
             tableBody.innerHTML = '';
             
-            // Відсортувати за датою та взяти останні 5
+            // Sort by date and take the last 5
             const recentDoctors = [...doctorsData]
                 .sort((a, b) => new Date(b.date) - new Date(a.date))
                 .slice(0, 5);
@@ -1001,7 +948,7 @@
                 ambulatoriaCell.textContent = doctor.ambulatoria;
                 row.appendChild(ambulatoriaCell);
                 
-                // Перші дві вікові групи
+                // First two age groups
                 const age05Cell = document.createElement('td');
                 age05Cell.textContent = doctor.declarations[0];
                 row.appendChild(age05Cell);
@@ -1018,14 +965,14 @@
             });
         }
         
-        // Оновлення карток із загальною інформацією
+        // Update summary cards
         function updateSummaryCards(data) {
             const totalDeclarations = calculateTotalDeclarations(data);
             document.getElementById('totalDeclarations').textContent = totalDeclarations.toLocaleString('uk-UA');
             
             document.getElementById('doctorsCount').textContent = data.length;
             
-            // Знайти найпопулярнішу вікову групу
+            // Find the most popular age group
             const ageGroupTotals = calculateAgeGroupTotals(data);
             let maxIndex = 0;
             let maxValue = 0;
@@ -1040,12 +987,12 @@
             document.getElementById('popularAgeGroup').textContent = AGE_GROUPS[maxIndex];
         }
         
-        // Розрахунок загальної кількості декларацій
+        // Calculate total declarations
         function calculateTotalDeclarations(data) {
             return data.reduce((total, doctor) => total + doctor.total, 0);
         }
         
-        // Розрахунок загальної кількості декларацій за віковими групами
+        // Calculate total declarations by age group
         function calculateAgeGroupTotals(data) {
             const totals = [0, 0, 0, 0, 0];
             
@@ -1058,7 +1005,7 @@
             return totals;
         }
         
-        // Розрахунок загальної кількості декларацій за амбулаторіями
+        // Calculate total declarations by ambulatoria
         function calculateAmbulatoriaTotals(data) {
             const totals = {};
             
@@ -1069,7 +1016,7 @@
                 totals[doctor.ambulatoria] += doctor.total;
             });
             
-            // Додати амбулаторії, в яких немає лікарів (з нульовими значеннями)
+            // Add ambulatorias with no doctors (with zero values)
             ambulatorias.forEach(ambulatoria => {
                 if (!totals[ambulatoria]) {
                     totals[ambulatoria] = 0;
@@ -1079,12 +1026,12 @@
             return totals;
         }
         
-        // Ініціалізація графіків
+        // Initialize charts
         function initCharts(data) {
             const ageGroupTotals = calculateAgeGroupTotals(data);
             const ambulatoriaTotals = calculateAmbulatoriaTotals(data);
             
-            // Стовпчикова діаграма для вікових груп
+            // Bar chart for age groups
             const ageGroupCtx = document.getElementById('ageGroupChart');
             if (ageGroupCtx) {
                 if (ageGroupChartInstance) {
@@ -1132,7 +1079,7 @@
                 });
             }
             
-            // Кругова діаграма для амбулаторій
+            // Pie chart for ambulatorias
             const ambulatoriaCtx = document.getElementById('ambulatoriaChart');
             if (ambulatoriaCtx) {
                 if (ambulatoriaChartInstance) {
@@ -1176,7 +1123,7 @@
             }
         }
         
-        // Фільтрація даних в таблиці
+        // Filter table data
         function filterTable() {
             const filterDoctor = document.getElementById('filterDoctor').value.toLowerCase();
             const filterAmbulatoria = document.getElementById('filterAmbulatoria').value.toLowerCase();
@@ -1188,17 +1135,17 @@
             const filterTotal = document.getElementById('filterTotal').value;
             
             let filteredData = doctorsData.filter(doctor => {
-                // Фільтр за лікарем
+                // Filter by doctor name
                 if (filterDoctor && !doctor.name.toLowerCase().includes(filterDoctor)) {
                     return false;
                 }
                 
-                // Фільтр за амбулаторією
+                // Filter by ambulatoria
                 if (filterAmbulatoria && !doctor.ambulatoria.toLowerCase().includes(filterAmbulatoria)) {
                     return false;
                 }
                 
-                // Фільтр за віковими групами
+                // Filter by age groups
                 if (filterAge0_5 && doctor.declarations[0] != filterAge0_5) {
                     return false;
                 }
@@ -1215,7 +1162,7 @@
                     return false;
                 }
                 
-                // Фільтр за загальною кількістю
+                // Filter by total count
                 if (filterTotal && doctor.total != filterTotal) {
                     return false;
                 }
@@ -1228,7 +1175,7 @@
             initCharts(filteredData);
         }
         
-        // Скидання фільтрів
+        // Reset filters
         function resetFilters() {
             document.getElementById('filterDoctor').value = '';
             document.getElementById('filterAmbulatoria').value = '';
@@ -1244,7 +1191,7 @@
             initCharts(doctorsData);
         }
         
-        // Додавання нового лікаря
+        // Add a new doctor
         function addDoctor() {
             const name = document.getElementById('doctorName').value;
             const ambulatoria = document.getElementById('ambulatoria').value;
@@ -1283,7 +1230,7 @@
             showPage('stats');
         }
         
-        // Редагування лікаря
+        // Edit a doctor
         function editDoctor(id) {
             const doctor = doctorsData.find(d => d.id === id);
             if (!doctor) return;
@@ -1305,7 +1252,7 @@
             showPage('admin');
         }
         
-        // Оновлення даних лікаря
+        // Update a doctor
         function updateDoctor() {
             if (currentEditId === null) return;
             
@@ -1348,7 +1295,7 @@
             showPage('stats');
         }
         
-        // Видалення лікаря
+        // Delete a doctor
         function deleteDoctor(id) {
             if (confirm('Ви впевнені, що хочете видалити цього лікаря?')) {
                 doctorsData = doctorsData.filter(d => d.id !== id);
@@ -1358,7 +1305,7 @@
             }
         }
         
-        // Скасування редагування
+        // Cancel editing
         function cancelEdit() {
             clearForm();
             document.getElementById('addDataBtn').style.display = 'inline-block';
@@ -1367,7 +1314,7 @@
             currentEditId = null;
         }
         
-        // Очищення форми
+        // Clear the form
         function clearForm() {
             document.getElementById('doctorName').value = '';
             document.getElementById('ambulatoria').value = '';
@@ -1378,7 +1325,7 @@
             document.getElementById('age65').value = '';
         }
         
-        // Експорт даних
+        // Export data
         function exportData() {
             const data = {
                 doctors: doctorsData,
@@ -1398,7 +1345,7 @@
             alert('Дані успішно експортовано');
         }
         
-        // Імпорт даних
+        // Import data
         function importData(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1426,16 +1373,16 @@
             };
             reader.readAsText(file);
             
-            // Скинути значення input для можливості повторного вибору того ж файлу
+            // Reset input value to allow selecting the same file again
             event.target.value = '';
         }
         
-        // Ініціалізація при завантаженні сторінки
+        // Initialize on page load
         window.onload = function() {
             loadData();
             initDashboard();
             
-            // Додати обробники подій для навігації
+            // Add event handlers for navigation
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1444,7 +1391,7 @@
                 });
             });
             
-            // Додати обробники подій для кнопок
+            // Add event handlers for buttons
             document.getElementById('addAmbulatoriaBtn').addEventListener('click', addAmbulatoria);
             document.getElementById('addDataBtn').addEventListener('click', addDoctor);
             document.getElementById('updateDataBtn').addEventListener('click', updateDoctor);
@@ -1454,7 +1401,7 @@
             document.getElementById('exportDataBtn2').addEventListener('click', exportData);
             document.getElementById('importData').addEventListener('change', importData);
             
-            // Додати обробники для фільтрів таблиці
+            // Add handlers for table filters
             document.getElementById('filterDoctor').addEventListener('input', filterTable);
             document.getElementById('filterAmbulatoria').addEventListener('input', filterTable);
             document.getElementById('filterAge0_5').addEventListener('input', filterTable);
